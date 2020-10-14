@@ -398,9 +398,9 @@ abstract class AmazonCore
      */
     public function setConfig($config)
     {
-        //if (! $this->validateAndSetConfig($config)) {
-            //throw new \Exception('Configuration values not set correctly. See log for details.');
-        //}
+        if (! $this->validateAndSetConfig($config)) {
+            throw new \Exception('Configuration values not set correctly. See log for details.');
+        }
     }
 
     /**
