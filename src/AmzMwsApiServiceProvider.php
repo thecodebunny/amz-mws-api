@@ -4,7 +4,7 @@ namespace Thecodebunny\AmzMwsApi;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class MwsServiceProvider extends BaseServiceProvider
+class AmzMwsApiServiceProvider extends BaseServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.

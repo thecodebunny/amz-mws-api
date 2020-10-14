@@ -56,5 +56,6 @@
                 "AmzMwsApi": "Thecodebunny\\AmzMwsApi\\AmzMwsApiFacade"
             }
         }
-    }
+    },
+    "minimum-stability": "stable"
 }
