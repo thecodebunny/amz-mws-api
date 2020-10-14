@@ -2,59 +2,41 @@
 
 namespace Thecodebunny\AmzMwsApi;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class AmzMwsApiServiceProvider extends ServiceProvider
+class MwsServiceProvider extends BaseServiceProvider
 {
     /**
-     * Bootstrap the application services.
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
      */
-    public function boot()
-    {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'amz-mws-api');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'amz-mws-api');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('amz-mws-api.php'),
-            ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/amz-mws-api'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/amz-mws-api'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/amz-mws-api'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
-        }
-    }
+    protected $defer = false;
 
     /**
-     * Register the application services.
+     * Register the service provider.
+     *
+     * @return void
      */
     public function register()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'amz-mws-api');
+        $configPath = __DIR__.'/config/amazon-mws.php';
+        $this->mergeConfigFrom($configPath, 'amazon-mws');
+    }
 
-        // Register the main class to use with the facade
-        $this->app->singleton('amz-mws-api', function () {
-            return new AmzMwsApi;
-        });
+    public function boot()
+    {
+        $configPath = __DIR__.'/config/amazon-mws.php';
+        $this->publishes([$configPath => config_path('amazon-mws.php')], 'config');
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
     }
 }
