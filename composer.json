@@ -6,7 +6,7 @@
         "amz-mws-api"
     ],
     "homepage": "https://github.com/thecodebunny/amz-mws-api",
-    "license": "proprietery",
+    "license": "MIT",
     "type": "library",
     "authors": [
         {
