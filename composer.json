@@ -1,0 +1,54 @@
+{
+    "name": "thecodebunny/amz-mws-api",
+    "description": "",
+    "keywords": [
+        "thecodebunny",
+        "amz-mws-api"
+    ],
+    "homepage": "https://github.com/thecodebunny/amz-mws-api",
+    "license": "GNU AGPLv",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Hemang Vyas",
+            "email": "hemangvyas11@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thecodebunny\\AmzMwsApi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thecodebunny\\AmzMwsApi\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Thecodebunny\\AmzMwsApi\\AmzMwsApiServiceProvider"
+            ],
+            "aliases": {
+                "AmzMwsApi": "Thecodebunny\\AmzMwsApi\\AmzMwsApiFacade"
+            }
+        }
+    }
+}
