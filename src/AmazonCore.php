@@ -136,13 +136,13 @@ abstract class AmazonCore
      * from the list to use as a response. See <i>setMock</i> for more information.</p>
      * @param string $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    protected function __construct($s, $mock = false, $m = null, $config = null)
+    protected function __construct($s, $mock = false, $m = null)
     {
-        //$this->setStore($s);
+        $this->setStore($s);
         $this->setMock($mock, $m);
-        if ($config) {
-            $this->setConfig($config);
-        }
+        //if ($config) {
+            //$this->setConfig($config);
+        //}
 
         $this->env = __DIR__.'/environment.php';
         $this->options['SignatureVersion'] = 2;
@@ -418,8 +418,10 @@ abstract class AmazonCore
      */
     public function setStore($s)
     {
-        $store = Config::get('amazon-mws.store');
-
+        // $store = Config::get('amazon-mws.store');
+        $this->validateAndSetConfig($s);
+        $this->storeName = $s;
+        /**
         if ($store && array_key_exists($s, $store)) {
             if ($this->validateAndSetConfig($store[$s])) {
                 $this->storeName = $s;
@@ -429,6 +431,7 @@ abstract class AmazonCore
         } else {
             throw new \Exception("Store $s does not exist!");
         }
+        */
     }
 
     public function validateAndSetConfig($config)
