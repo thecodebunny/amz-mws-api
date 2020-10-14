@@ -138,7 +138,7 @@ abstract class AmazonCore
      */
     protected function __construct($s, $mock = false, $m = null, $config = null)
     {
-        $this->setStore($s);
+        //$this->setStore($s);
         $this->setMock($mock, $m);
         if ($config) {
             $this->setConfig($config);
