@@ -211,6 +211,8 @@ class AmazonInventoryList extends AmazonInventoryCore implements \Iterator
             $xml = simplexml_load_string($response['body'])->$path;
         }
 
+        return $response['body'];
+
         $this->parseXML($xml->InventorySupplyList);
 
         $this->checkToken($xml);

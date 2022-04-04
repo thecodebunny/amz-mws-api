@@ -134,7 +134,7 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator
             if ($lower) {
                 $after = $this->genTime($lower);
             } else {
-                $after = $this->genTime('- 2 min');
+                $after = $this->genTime('- 30 days');
             }
             if ($after > $before) {
                 $after = $this->genTime($upper.' - 150 sec');
@@ -405,16 +405,22 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator
             $xml = simplexml_load_string($response['body'])->$path;
         }
 
-        $this->parseXML($xml);
+        $amzData = str_replace("ns2:","",$response['body']);
+        $json = json_encode(simplexml_load_string($amzData));
+        $result = json_decode($json,TRUE);
+
+        //$this->parseXML($xml);
 
         $this->checkToken($xml);
 
-        if ($this->tokenFlag && $this->tokenUseFlag && $r === true) {
-            while ($this->tokenFlag) {
-                $this->log('Recursively fetching more orders');
-                $this->fetchOrders(false);
-            }
-        }
+        //if ($this->tokenFlag && $this->tokenUseFlag && $r === true) {
+            //while ($this->tokenFlag) {
+                //$this->log('Recursively fetching more orders');
+                //$this->fetchOrders(false);
+            //}
+        //}
+        
+        return $result;
     }
 
     /**

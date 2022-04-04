@@ -113,13 +113,13 @@ class AmazonReport extends AmazonReportsCore
             $response = $this->sendRequest($url, ['Post' => $query]);
 
             if (! $this->checkResponse($response)) {
-                return false;
+                //return false;
             }
 
             $this->rawreport = $response['body'];
         }
 
-        return $this->rawreport;
+        return $response;
     }
 
     /**

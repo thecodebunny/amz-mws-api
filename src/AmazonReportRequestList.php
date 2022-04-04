@@ -318,6 +318,8 @@ class AmazonReportRequestList extends AmazonReportsCore implements \Iterator
             $xml = simplexml_load_string($response['body'])->$path;
         }
 
+        return $response['body'];
+
         $this->parseXML($xml);
 
         $this->checkToken($xml);

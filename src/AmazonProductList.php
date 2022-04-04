@@ -152,8 +152,12 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
 
             $xml = simplexml_load_string($response['body']);
         }
+        
+        $amzData = str_replace("ns2:","",$response['body']);
+        $json = json_encode(simplexml_load_string($amzData));
+        $result = json_decode($json,TRUE);
 
-        $this->parseXML($xml);
+        return $result;
     }
 
     /**

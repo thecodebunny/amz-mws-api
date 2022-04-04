@@ -869,7 +869,7 @@ abstract class AmazonCore
     {
         return rawurlencode($value);
 
-        return str_replace('%7E', '~', rawurlencode($value));
+        return str_replace('=','%3D',str_replace('%7E', '~', rawurlencode($value)));
     }
 
     /**

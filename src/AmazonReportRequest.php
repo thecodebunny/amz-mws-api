@@ -144,7 +144,8 @@ class AmazonReportRequest extends AmazonReportsCore
      */
     public function setCustomReport(bool $custom)
     {
-        $this->options['ReportOptions=custom'] = $custom;
+        
+        $this->options['ReportOptions'] = 'custom=1';
     }
 
     /**
@@ -274,6 +275,8 @@ class AmazonReportRequest extends AmazonReportsCore
             return false;
         }
 
+
+
         $url = $this->urlbase.$this->urlbranch;
 
         $query = $this->genQuery();
@@ -282,6 +285,7 @@ class AmazonReportRequest extends AmazonReportsCore
         if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
+            
             $response = $this->sendRequest($url, ['Post' => $query]);
 
             if (! $this->checkResponse($response)) {
@@ -290,7 +294,7 @@ class AmazonReportRequest extends AmazonReportsCore
 
             $xml = simplexml_load_string($response['body'])->$path;
         }
-
+        return $response['body'];
         $this->parseXML($xml->ReportRequestInfo);
     }
 
